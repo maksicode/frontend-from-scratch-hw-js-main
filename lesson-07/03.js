@@ -10,5 +10,10 @@
 */
 
 function truncate(str, maxLength) {
-  // your code
+  if (str.length <= maxLength) {
+    return str;
+  }
+  return str.slice(0, maxLength - 3) + "...";
 }
+// const total = truncate('Добрый вечер дорогие гости!', 20)
+// console.log(total);
