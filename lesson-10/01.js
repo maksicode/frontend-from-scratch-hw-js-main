@@ -30,6 +30,11 @@ const model = {
     view.renderMovies(this.movies)
   },
   // your code
+  deleteMovie(movieId) {
+    this.movies = this.movies.filter((movie) => movie.id !== movieId);
+
+    view.renderMovies(model.movies);
+  },
 }
 
 const view = {
@@ -51,6 +56,15 @@ const view = {
     })
 
     // your code
+    const list = document.querySelector('.list');
+
+    list.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (event.target.classList.contains('delete-button')) {
+        const movieId = +event.target.parentElement.id;
+        controller.deleteMovie(movieId);
+      }
+    })
   },
   renderMovies(movies) {
     const list = document.querySelector('.list')
@@ -91,6 +105,10 @@ const controller = {
     }
   },
   // your code
+  deleteMovie(movieId) {
+    model.deleteMovie(movieId);
+    view.displayMessage('Фильм успешно удалён!', false);
+},
 }
 
 function init() {
